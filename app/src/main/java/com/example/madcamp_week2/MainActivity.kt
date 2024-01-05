@@ -18,7 +18,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         // 페이지 데이터 로드
-        val list = listOf(fragmentA(), fragmentB(), fragmentC(), fragmentD())
+        val list = listOf(Posts(), Chatting(), Recommendation(), Mypage())
 
         // 아답터 생성 및 연결
         val pagerAdapter = FragmentPagerAdapter(list, this)
@@ -29,24 +29,7 @@ class MainActivity : AppCompatActivity() {
 
         // 탭 레이아웃과 뷰페이저 연결
         TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->
-            tab.customView = layoutInflater.inflate(R.layout.activity_main, null).apply {
-                val tabIcon = findViewById<ImageView>(R.id.tabIcon)
-                // 각 탭에 대한 이미지 리소스 설정
-                when (position) {
-                    0 -> {
-                        tabIcon.setImageResource(R.drawable.ic_tab_1)
-                    }
-                    1 -> {
-                        tabIcon.setImageResource(R.drawable.ic_tab_2)
-                    }
-                    2 -> {
-                        tabIcon.setImageResource(R.drawable.ic_tab_3)
-                    }
-                    3 -> {
-                        tabIcon.setImageResource(R.drawable.ic_tab_4)
-                    }
-                }
-            }
+            tab.text = titles[position]
         }.attach()
 
         // 현재 활성화된 프래그먼트 추적
