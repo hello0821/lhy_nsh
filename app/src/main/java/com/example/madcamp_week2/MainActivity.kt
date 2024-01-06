@@ -18,14 +18,14 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         // 페이지 데이터 로드
-        val list = listOf(Posts(), Chatting(), Recommendation(), Mypage())
+        val list = listOf(login(), Posts(), Chatting(), Recommendation(), Mypage())
 
         // 아답터 생성 및 연결
         val pagerAdapter = FragmentPagerAdapter(list, this)
         binding.viewPager.adapter = pagerAdapter
 
         // 탭 메뉴 제목 설정
-        val titles = listOf("Posts", "Chatting", "Recommendation", "Mypage")
+        val titles = listOf("login", "Posts", "Chatting", "Recommendation", "Mypage")
 
         // 탭 레이아웃과 뷰페이저 연결
         TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->
