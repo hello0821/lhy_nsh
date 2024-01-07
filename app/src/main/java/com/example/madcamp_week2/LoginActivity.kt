@@ -59,6 +59,7 @@ interface ApiService {
     @POST("/checkdata")
     fun checkdata(@Body data: check_input): Call<check_result>
 }
+
 class LoginActivity : AppCompatActivity() {
 
     lateinit var mGoogleSignInClient: GoogleSignInClient
@@ -110,6 +111,9 @@ class LoginActivity : AppCompatActivity() {
         resultLauncher =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
                 // 정상적으로 결과가 받아와진다면 조건문 실행
+                val task: Task<GoogleSignInAccount> =
+                    GoogleSignIn.getSignedInAccountFromIntent(result.data)
+                handleSignInResult(task)
                 if (result.resultCode == Activity.RESULT_OK) {
                     val task: Task<GoogleSignInAccount> =
                         GoogleSignIn.getSignedInAccountFromIntent(result.data)
