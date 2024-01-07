@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SignUpActivity"
+    android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <ImageView
+            android:layout_width="250dp"
+            android:layout_height="250dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="40dp"
+            android:src="@drawable/logo">
+        </ImageView>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Travel Together"
+            android:textSize="30sp"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:layout_marginTop="20dp"
+            android:textColor="@color/pointcolor">
+        </TextView>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=": The most beautiful moment"
+            android:textSize="15sp"
+            android:gravity="center"
+            android:textColor="@color/pointcolor">
+        </TextView>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="40sp"
+            android:gravity="left"
+            android:text="Create your"
+            android:textStyle="bold"
+            android:textColor="@color/pointcolor"
+            android:layout_marginTop="20dp">
+        </TextView>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="40sp"
+            android:gravity="left"
+            android:text="Account"
+            android:textStyle="bold"
+            android:textColor="@color/pointcolor">
+        </TextView>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        android:layout_marginTop="15dp">
+        <EditText
+            android:layout_width="120dp"
+            android:layout_height="match_parent"
+            android:id="@+id/name"
+            android:inputType="text"
+            android:hint="Full Name"/>
+        <EditText
+            android:layout_width="120dp"
+            android:layout_height="match_parent"
+            android:id="@+id/nickname"
+            android:inputType="text"
+            android:hint="NickName"/>
+        <EditText
+            android:layout_width="120dp"
+            android:layout_height="match_parent"
+            android:id="@+id/type"
+            android:inputType="text"
+            android:hint="Type"/>
+    </LinearLayout>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:id="@+id/introduction"
+        android:inputType="text"
+        android:hint="Please write short introduction of yourself" />
+    <Button
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:layout_gravity="center"
+        android:text="가입하기"
+        android:background="@color/pointcolor"
+        android:id="@+id/signup">
+    </Button>
+    <Button
+        android:layout_marginTop="10dp"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:layout_gravity="center"
+        android:text="로그인 화면으로 돌아가기"
+        android:background="@color/pointcolor"
+        android:id="@+id/goback">
+    </Button>
+
+</LinearLayout>
+
