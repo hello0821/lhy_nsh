@@ -15,6 +15,8 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
 import com.example.madcamp_week2.databinding.ActivityLoginBinding
+import com.google.gson.Gson
+import com.google.gson.JsonObject
 
 
 class LoginActivity : AppCompatActivity() {
@@ -62,6 +64,9 @@ class LoginActivity : AppCompatActivity() {
         resultLauncher =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
                 // 정상적으로 결과가 받아와진다면 조건문 실행
+                val task: Task<GoogleSignInAccount> =
+                    GoogleSignIn.getSignedInAccountFromIntent(result.data)
+                handleSignInResult(task)
                 if (result.resultCode == Activity.RESULT_OK) {
                     val task: Task<GoogleSignInAccount> =
                         GoogleSignIn.getSignedInAccountFromIntent(result.data)
@@ -85,6 +90,7 @@ class LoginActivity : AppCompatActivity() {
             Log.d("로그인한 유저의 이름", givenName)
             Log.d("로그인한 유저의 전체이름", displayName)
             Log.d("로그인한 유저의 프로필 사진의 주소", photoUrl)
+
 
             moveTomainActivity()
         } catch (e: ApiException) {
