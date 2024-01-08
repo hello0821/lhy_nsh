@@ -61,37 +61,48 @@
         android:orientation="horizontal"
         android:layout_marginTop="15dp">
         <EditText
+            android:layout_marginLeft="5dp"
             android:layout_width="120dp"
             android:layout_height="match_parent"
             android:id="@+id/name"
             android:inputType="text"
-            android:hint="Full Name"/>
+            android:hint="   Full Name"
+            android:background="@drawable/edittext_border"/>
         <EditText
+            android:layout_marginLeft="10dp"
             android:layout_width="120dp"
             android:layout_height="match_parent"
             android:id="@+id/nickname"
             android:inputType="text"
-            android:hint="NickName"/>
+            android:hint="   NickName"
+            android:background="@drawable/edittext_border"/>
         <EditText
+            android:layout_marginLeft="10dp"
             android:layout_width="120dp"
             android:layout_height="match_parent"
             android:id="@+id/type"
             android:inputType="text"
-            android:hint="Type"/>
+            android:hint="   Type"
+            android:background="@drawable/edittext_border"/>
     </LinearLayout>
     <EditText
-        android:layout_width="match_parent"
+        android:layout_marginTop="5dp"
+        android:layout_width="380dp"
         android:layout_height="50dp"
         android:id="@+id/introduction"
         android:inputType="text"
-        android:hint="Please write short introduction of yourself" />
+        android:layout_marginLeft="5dp"
+        android:hint="   Please write short introduction of yourself"
+        android:background="@drawable/edittext_border"/>
     <Button
+        android:layout_marginTop="10dp"
         android:layout_width="300dp"
         android:layout_height="40dp"
         android:layout_gravity="center"
         android:text="가입하기"
         android:background="@color/pointcolor"
-        android:id="@+id/signup">
+        android:id="@+id/signup"
+        android:textColor="@color/white">
     </Button>
     <Button
         android:layout_marginTop="10dp"
@@ -100,7 +111,8 @@
         android:layout_gravity="center"
         android:text="로그인 화면으로 돌아가기"
         android:background="@color/pointcolor"
-        android:id="@+id/goback">
+        android:id="@+id/goback"
+        android:textColor="@color/white">
     </Button>
 
 </LinearLayout>
