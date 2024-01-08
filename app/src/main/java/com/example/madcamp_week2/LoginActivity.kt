@@ -137,7 +137,7 @@ class LoginActivity : AppCompatActivity() {
             Log.d("로그인한 유저의 프로필 사진의 주소", photoUrl)
 
             mretrofit = Retrofit.Builder()
-                .baseUrl("http://143.248.191.68:5000/")
+                .baseUrl("http://143.248.191.200:5000/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
             mRetrofitAPI = mretrofit.create(ApiService::class.java)

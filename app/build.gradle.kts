@@ -35,10 +35,14 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
-    viewBinding { buildFeatures.viewBinding = true }
+    buildFeatures {
+        viewBinding = true
+    }
 }
 
 dependencies {
+    implementation ("io.getstream:stream-chat-android-ui-components:5.0.2")
+    implementation ("androidx.activity:activity-ktx:1.4.0")
 
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
