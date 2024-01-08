@@ -39,8 +39,7 @@ class SignUpActivity : AppCompatActivity() {
             val textnickname = binding.nickname.text
             val texttype = binding.type.text
             val textintroduction = binding.introduction.text
-
-            val signupdata = PostData(1,"2",textintroduction.toString(),textname.toString(),
+            val signupdata = PostData(12,"2",textintroduction.toString(),textname.toString(),
                 "1", listOf(Review("2","2")),listOf(2),"2", texttype.toString())
             sendtoserver(signupdata)
         }

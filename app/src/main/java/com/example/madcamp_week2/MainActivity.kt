@@ -1,5 +1,6 @@
 package com.example.madcamp_week2
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -34,5 +35,25 @@ class MainActivity : AppCompatActivity() {
 
         viewPager.adapter = adapter
         tab.setupWithViewPager(viewPager)
+
+        tab.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+            override fun onTabSelected(tab: TabLayout.Tab?) {
+                if (tab?.position == 1) { // "CHATTING" 탭의 인덱스, 0부터 시작
+                    val intent = Intent(this@MainActivity, ChatActivity::class.java)
+                    startActivity(intent)
+                }
+            }
+
+            override fun onTabUnselected(tab: TabLayout.Tab?) {
+                // 탭이 선택 해제되었을 때의 동작
+            }
+
+            override fun onTabReselected(tab: TabLayout.Tab?) {
+                // 이미 선택된 탭이 다시 선택되었을 때의 동작
+            }
+        })
+
     }
+
+
 }

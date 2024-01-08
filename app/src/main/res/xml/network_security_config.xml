@@ -3,7 +3,7 @@
     <base-config cleartextTrafficPermitted="true">
         <trust-anchors>
             <!-- 특정 서버의 인증서를 추가하려면 아래와 같이 사용합니다. -->
-            <!--<certificates src="system" />-->
+            <certificates src="system" />
             <!--<certificates src="user" />-->
             <!--<certificates src="@raw/my_ca" />-->
         </trust-anchors>
