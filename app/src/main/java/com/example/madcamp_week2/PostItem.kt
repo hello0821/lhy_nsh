@@ -5,3 +5,4 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 class PostItem(val id: Number, val title: String, val writer: String, val date: String, val loc: String, val content: String) : Parcelable
+class ReviewItem(val title: String, val content: String)

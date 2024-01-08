@@ -15,15 +15,18 @@ import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
 
+data class id(
+    val _id: String
+)
 interface signupapi {
     @POST("/signup")
-    fun signup(@Body data: PostData): Call<PostData>
+    fun signup(@Body data: PostData): Call<id>
 }
 
 class SignUpActivity : AppCompatActivity() {
 
     var mretrofit = Retrofit.Builder()
-        .baseUrl("http://143.248.191.68:5000/")
+        .baseUrl("http://143.248.191.200:5000/")
         .addConverterFactory(GsonConverterFactory.create())
         .build()
     var mRetrofitAPI = mretrofit.create(signupapi::class.java)
@@ -36,7 +39,6 @@ class SignUpActivity : AppCompatActivity() {
             val textnickname = binding.nickname.text
             val texttype = binding.type.text
             val textintroduction = binding.introduction.text
-
             val signupdata = PostData(12,"2",textintroduction.toString(),textname.toString(),
                 "1", listOf(Review("2","2")),listOf(2),"2", texttype.toString())
             sendtoserver(signupdata)
@@ -51,18 +53,21 @@ class SignUpActivity : AppCompatActivity() {
         setContentView(binding.root)
     }
     private fun sendtoserver(data: PostData){
-        val postCall: Call<PostData> = mRetrofitAPI.signup(data)
-        postCall.enqueue(object: Callback<PostData>{
-            override fun onResponse(call: Call<PostData>, response: Response<PostData>) {
+        val postCall: Call<id> = mRetrofitAPI.signup(data)
+        postCall.enqueue(object: Callback<id>{
+            override fun onResponse(call: Call<id>, response: Response<id>) {
                 if(response.isSuccessful){
                     println("yes!!!!!!")
-                    Log.d("1", "${response.body()}")
+                    val responsedata = response.body()
+                    responsedata?.let{
+                        Log.d("1", "user id is${it._id}")
+                    }
                 }
                 else{
                     println("response문제")
                 }
             }
-            override fun onFailure(call: Call<PostData>, t: Throwable) {
+            override fun onFailure(call: Call<id>, t: Throwable) {
                 println("fail")
             }
         })

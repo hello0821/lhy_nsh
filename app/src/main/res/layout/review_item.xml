@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="200dp"
+    android:layout_height="80dp"
+    android:background="@drawable/edittext_border"
+    android:orientation="vertical">
+    <TextView
+        android:layout_marginTop="3dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="누구의 리뷰입니다"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        android:textColor="@color/pointcolor"
+        android:id="@+id/review_title">
+    </TextView>
+    <TextView
+        android:layout_marginTop="3dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="리뷰 내용이 여기에 나타납니다."
+        android:textSize="10sp"
+        android:textColor="@color/pointcolor"
+        android:id="@+id/review_content">
+    </TextView>
+</LinearLayout>
