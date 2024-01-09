@@ -25,16 +25,17 @@ import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
 
-data class MyData(
-    val id: String
+data class image(
+    val success: String
 )
 
 data class PostData(
-    val _id: Int,
-    val identityuri: String,
+    val _id: String,
+    val identityfilename: String,
+    val profilefilename: String,
     val introd: String,
     val name: String,
-    val profileuri: String,
+    val nickname: String,
     val reviews: List<Review>,
     val teamid: List<Int>,
     val temp: String,
@@ -137,7 +138,7 @@ class LoginActivity : AppCompatActivity() {
             Log.d("로그인한 유저의 프로필 사진의 주소", photoUrl)
 
             mretrofit = Retrofit.Builder()
-                .baseUrl("http://143.248.191.200:5000/")
+                .baseUrl(BASEURL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
             mRetrofitAPI = mretrofit.create(ApiService::class.java)
