@@ -91,7 +91,7 @@ class Recommendation : Fragment() {
                 .addToBackStack(null)
                 .commit()
 
-
+            (activity as MainActivity)?.moveToTab(0)
         }
 
         updateQuestion()

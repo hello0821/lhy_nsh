@@ -11,107 +11,116 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
         <ImageView
-            android:layout_width="250dp"
-            android:layout_height="250dp"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
             android:layout_gravity="center"
-            android:layout_marginTop="40dp"
-            android:src="@drawable/logo">
-        </ImageView>
+            android:layout_marginTop="70dp"
+            android:src="@drawable/logo" />
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Travel Together"
-            android:textSize="30sp"
-            android:gravity="center"
-            android:textStyle="bold"
             android:layout_marginTop="20dp"
-            android:textColor="@color/pointcolor">
-        </TextView>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text=": The most beautiful moment"
-            android:textSize="15sp"
             android:gravity="center"
-            android:textColor="@color/pointcolor">
-        </TextView>
+            android:text="Travel Together"
+            android:textColor="@color/pointcolor"
+            android:textSize="30sp"
+            android:textStyle="bold"/>
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="40sp"
+            android:gravity="center"
+            android:text=": The most beautiful moment"
+            android:textColor="@color/pointcolor"
+            android:textSize="15sp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="30sp"
             android:gravity="left"
             android:text="Create your"
             android:textStyle="bold"
             android:textColor="@color/pointcolor"
-            android:layout_marginTop="20dp">
-        </TextView>
+            android:layout_marginTop="50dp"
+            android:layout_marginLeft="15dp"/>
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="40sp"
+            android:textSize="30sp"
             android:gravity="left"
             android:text="Account"
             android:textStyle="bold"
-            android:textColor="@color/pointcolor">
-        </TextView>
+            android:textColor="@color/pointcolor"
+            android:layout_marginLeft="15dp"/>
+
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginTop="15dp">
+        android:layout_marginTop="30dp">
         <EditText
-            android:layout_marginLeft="5dp"
-            android:layout_width="120dp"
-            android:layout_height="match_parent"
+            android:layout_marginLeft="15dp"
+            android:paddingLeft="15dp"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="40dp"
             android:id="@+id/name"
             android:inputType="text"
-            android:hint="   Full Name"
+            android:hint="Full Name"
+            android:textSize="15sp"
             android:background="@drawable/edittext_border"/>
         <EditText
-            android:layout_marginLeft="10dp"
-            android:layout_width="120dp"
-            android:layout_height="match_parent"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:paddingLeft="15dp"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
             android:id="@+id/nickname"
             android:inputType="text"
-            android:hint="   NickName"
+            android:hint="NickName"
+            android:textSize="15sp"
             android:background="@drawable/edittext_border"/>
-        <EditText
-            android:layout_marginLeft="10dp"
-            android:layout_width="120dp"
-            android:layout_height="match_parent"
-            android:id="@+id/type"
-            android:inputType="text"
-            android:hint="   Type"
-            android:background="@drawable/edittext_border"/>
+
     </LinearLayout>
     <EditText
-        android:layout_marginTop="5dp"
-        android:layout_width="380dp"
-        android:layout_height="50dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="10dp"
+        android:paddingLeft="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:id="@+id/type"
+        android:inputType="text"
+        android:hint="Type"
+        android:textSize="15sp"
+        android:background="@drawable/edittext_border"/>
+
+    <EditText
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="10dp"
+        android:paddingLeft="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
         android:id="@+id/introduction"
         android:inputType="text"
-        android:layout_marginLeft="5dp"
-        android:hint="   Please write short introduction of yourself"
+        android:hint="Short introduction of yourself"
+        android:textSize="15sp"
         android:background="@drawable/edittext_border"/>
     <Button
-        android:layout_marginTop="10dp"
-        android:layout_width="300dp"
+        android:layout_marginTop="30dp"
+        android:layout_width="140dp"
         android:layout_height="40dp"
         android:layout_gravity="center"
         android:text="가입하기"
-        android:background="@color/pointcolor"
+        android:textSize="17sp"
+        android:background="@drawable/green_rectangle"
         android:id="@+id/signup"
-        android:textColor="@color/white">
-    </Button>
-    <Button
-        android:layout_marginTop="10dp"
-        android:layout_width="300dp"
-        android:layout_height="40dp"
-        android:layout_gravity="center"
-        android:text="로그인 화면으로 돌아가기"
-        android:background="@color/pointcolor"
-        android:id="@+id/goback"
         android:textColor="@color/white">
     </Button>
 

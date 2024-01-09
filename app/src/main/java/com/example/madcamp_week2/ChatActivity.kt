@@ -21,6 +21,8 @@ import io.getstream.chat.android.ui.channel.list.header.viewmodel.bindView
 import io.getstream.chat.android.ui.channel.list.viewmodel.ChannelListViewModel
 import io.getstream.chat.android.ui.channel.list.viewmodel.bindView
 import io.getstream.chat.android.ui.channel.list.viewmodel.factory.ChannelListViewModelFactory
+import io.getstream.chat.android.ui.search.list.viewmodel.SearchViewModel
+import io.getstream.chat.android.ui.search.list.viewmodel.bindView
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import retrofit2.Call
@@ -71,7 +73,6 @@ class ChatActivity : AppCompatActivity() {
         lifecycleScope.launch {
             val getUserInfoDeferred = async { getUserInfo(server_token) }
             getUserInfoDeferred.await() // getUserInfo 함수가 완료될 때까지 기다립니다.
-
             setUpUI()
         }
 
@@ -98,7 +99,7 @@ class ChatActivity : AppCompatActivity() {
 
         // Step 3 - 유저 정보 초기화
         user = User(
-            id = USER_ID.toString(),
+            id = USER_ID,
             name = USER_NAME,
             image = "https://bit.ly/2TIt8NR"
         )
@@ -116,6 +117,7 @@ class ChatActivity : AppCompatActivity() {
                 }
             }
         }
+
 
         binding.channelListHeaderView.setOnActionButtonClickListener {
             showCreateChannelDialog()

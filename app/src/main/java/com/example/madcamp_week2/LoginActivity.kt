@@ -98,9 +98,6 @@ class LoginActivity : AppCompatActivity() {
             button5.setOnClickListener {
                 signOut()
             }
-            button6.setOnClickListener {
-                GetCurrentUserProfile()
-            }
             button7.setOnClickListener{
                 signup()
             }

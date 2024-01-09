@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<font-family xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <!-- light -->
+    <font
+        android:font="@font/gmarketsans_light"
+        android:fontStyle="normal"
+        android:fontWeight="100"
+        app:font="@font/gmarketsans_light"
+        app:fontStyle="normal"
+        app:fontWeight="100"
+        />
+
+    <!-- regular -->
+    <font
+        android:font="@font/gmarketsans_medium"
+        android:fontStyle="normal"
+        android:fontWeight="400"
+        app:font="@font/gmarketsans_medium"
+        app:fontStyle="normal"
+        app:fontWeight="400"
+        />
+
+    <!-- bold -->
+    <font
+        android:font="@font/gmarketsans_bold"
+        android:fontStyle="normal"
+        android:fontWeight="1000"
+        app:font="@font/gmarketsans_bold"
+        app:fontStyle="normal"
+        app:fontWeight="1000"
+        />
+
+</font-family>
