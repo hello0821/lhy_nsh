@@ -19,20 +19,23 @@ class DetailPost : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.detail_post, container, false)
         val item = arguments?.getParcelable<PostItem>("detailPostItem")
-
         val title = view.findViewById<TextView>(R.id.detailTitle)
-        val writer = view.findViewById<TextView>(R.id.detailWriter)
-        val image = view.findViewById<ImageView>(R.id.detailImage)
-        val date = view.findViewById<TextView>(R.id.detailDate)
+        /*val writer = view.findViewById<TextView>(R.id.detailWriter)
+        val image = view.findViewById<ImageView>(R.id.detailImage)*/
+        val date1 = view.findViewById<TextView>(R.id.detailDate1)
+        val date2 = view.findViewById<TextView>(R.id.detailDate2)
+
         val loc = view.findViewById<TextView>(R.id.detailLoc)
         val content = view.findViewById<TextView>(R.id.detailContent)
         val chatBtn = view.findViewById<Button>(R.id.moveToChatBtn)
+        /*val content = view.findViewById<TextView>(R.id.detailContent)*/
 
         title.text = item?.title
-        writer.text = item?.writer
-        date.text = item?.date
-        loc.text = item?.loc
-        content.text = item?.content
+       /* writer.text = item?.writerid*/
+        date1.text = item?.date1
+        date2.text = item?.date2
+        loc.text = item?.location
+        /*content.text = item?.content*/
 
         chatBtn.setOnClickListener {
             val intent = Intent(requireActivity(), ChatActivity::class.java)

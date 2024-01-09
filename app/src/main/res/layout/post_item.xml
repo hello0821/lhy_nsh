@@ -19,7 +19,8 @@
         android:layout_marginLeft="20dp"
         android:layout_marginBottom="20dp"
         android:layout_marginRight="20dp"
-        android:layout_marginTop="20dp"/>
+        android:layout_marginTop="20dp"
+        android:id="@+id/postimage"/>
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -37,10 +38,16 @@
             android:layout_marginBottom="5dp"/>
 
         <TextView
-            android:id="@+id/postDate"
+            android:id="@+id/postDate1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="2024.01.04 ~ 2024.01.10"
+            android:text="2024.01.04"
+            android:layout_marginBottom="5dp"/>
+        <TextView
+            android:id="@+id/postDate2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2024.01.04"
             android:layout_marginBottom="5dp"/>
         <TextView
             android:id="@+id/postLoc"

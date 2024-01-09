@@ -20,7 +20,32 @@ import io.getstream.chat.android.ui.message.list.header.viewmodel.MessageListHea
 import io.getstream.chat.android.ui.message.list.header.viewmodel.bindView
 import io.getstream.chat.android.ui.message.list.viewmodel.bindView
 import io.getstream.chat.android.ui.message.list.viewmodel.factory.MessageListViewModelFactory
+import okhttp3.ResponseBody
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.http.GET
+import retrofit2.http.Path
+import retrofit2.http.Query
+
 //import io.getstream.chatapplication.databinding.ActivityMessageListBinding
+
+data class check_value(
+    val value: Int
+)
+interface valueapi{
+    @GET("/checkteam")
+    fun checkteam(
+        @Query("myid") myid: String,
+        @Query("otheruserid") userid: String): Call<check_value>
+}
+var otheruserid: String =""
+var myid: String = ""
+private lateinit var mretrofit: Retrofit
+private lateinit var mRetrofitAPI: valueapi
+
 class AppAlertDialog(
     private val context: Context,
     private val title: String? = null,
@@ -89,6 +114,12 @@ class MessageListActivity : AppCompatActivity() {
         binding = ActivityMessageListBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        //chatactivity에서 넘어온 유저아이디
+        if (intent.hasExtra("others_id")) {
+            otheruserid = intent.getStringExtra("others_id").toString()
+            myid = intent.getStringExtra("my_id").toString()
+        }
+
         val cid = checkNotNull(intent.getStringExtra(CID_KEY)) {
             "MessageListActivity를 시작하기 위해서는 채널 아이디 (cid) 정보가 필요합니다."
         }
@@ -137,10 +168,30 @@ class MessageListActivity : AppCompatActivity() {
         //현재 채팅중인 유저가 나의 team 리스트에 있으면
         //GET /user
         // result.team.include(상대방id) == true
+        var test =0
+        mretrofit = Retrofit.Builder()
+            .baseUrl(BASEURL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+        mRetrofitAPI = mretrofit.create(valueapi::class.java)
+        val call: Call<check_value> = mRetrofitAPI.checkteam(myid, otheruserid)
+        call.enqueue(object: Callback<check_value> {
+            override fun onResponse(call: Call<check_value>, response: Response<check_value>) {
+                if(response.isSuccessful){
+                    val output = response.body()
+                    if(output?.value == 1){
+                        test = 1
+                    }
+                }
+            }
 
+            override fun onFailure(call: Call<check_value>, t: Throwable) {
+                TODO("Not yet implemented")
+            }
+
+        })
 
         //showReviewDialog()
-        val test = 1
         binding.messageListHeaderView.setAvatarClickListener {
             if (test == 1)
                 showReviewDialog()
