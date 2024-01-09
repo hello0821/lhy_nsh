@@ -26,7 +26,7 @@ interface signupapi {
 class SignUpActivity : AppCompatActivity() {
 
     var mretrofit = Retrofit.Builder()
-        .baseUrl("http://143.248.191.200:5000/")
+        .baseUrl(BASEURL)
         .addConverterFactory(GsonConverterFactory.create())
         .build()
     var mRetrofitAPI = mretrofit.create(signupapi::class.java)
@@ -39,12 +39,10 @@ class SignUpActivity : AppCompatActivity() {
             val textnickname = binding.nickname.text
             val texttype = binding.type.text
             val textintroduction = binding.introduction.text
-            val signupdata = PostData(12,"2",textintroduction.toString(),textname.toString(),
+            val signupdata = PostData("12","2",textintroduction.toString(),textname.toString(),
                 "1", listOf(Review("2","2")),listOf(2),"2", texttype.toString())
             sendtoserver(signupdata)
-        }
 
-        binding.goback.setOnClickListener{
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
             finish()

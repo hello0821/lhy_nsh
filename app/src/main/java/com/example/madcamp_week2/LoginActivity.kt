@@ -30,7 +30,7 @@ data class MyData(
 )
 
 data class PostData(
-    val _id: Int,
+    val _id: String,
     val identityuri: String,
     val introd: String,
     val name: String,
@@ -97,9 +97,6 @@ class LoginActivity : AppCompatActivity() {
             button5.setOnClickListener {
                 signOut()
             }
-            button6.setOnClickListener {
-                GetCurrentUserProfile()
-            }
             button7.setOnClickListener{
                 signup()
             }
@@ -137,7 +134,7 @@ class LoginActivity : AppCompatActivity() {
             Log.d("로그인한 유저의 프로필 사진의 주소", photoUrl)
 
             mretrofit = Retrofit.Builder()
-                .baseUrl("http://143.248.191.200:5000/")
+                .baseUrl(BASEURL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
             mRetrofitAPI = mretrofit.create(ApiService::class.java)

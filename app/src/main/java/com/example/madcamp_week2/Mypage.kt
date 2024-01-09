@@ -95,7 +95,7 @@ class Mypage : Fragment() {
         // SharedPreferences 초기화
         sharedPreferences = requireActivity().getSharedPreferences("my_preferences", Context.MODE_PRIVATE)
         mretrofit = Retrofit.Builder()
-            .baseUrl("http://143.248.191.200:5000/")
+            .baseUrl(BASEURL)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
         mRetrofitAPI = mretrofit.create(mypageapi::class.java)

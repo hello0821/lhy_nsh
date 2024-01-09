@@ -2,7 +2,8 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:id="@+id/message_container">
 
     <io.getstream.chat.android.ui.message.list.header.MessageListHeaderView
         android:id="@+id/messageListHeaderView"
@@ -19,7 +20,9 @@
         app:layout_constraintBottom_toTopOf="@+id/messageInputView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/messageListHeaderView" />
+        app:layout_constraintTop_toBottomOf="@+id/messageListHeaderView"
+        app:streamUiMessageBackgroundColorMine="@color/main"
+        app:streamUiMessageBackgroundColorTheirs="@color/gray"/>
 
     <io.getstream.chat.android.ui.message.input.MessageInputView
         android:id="@+id/messageInputView"
