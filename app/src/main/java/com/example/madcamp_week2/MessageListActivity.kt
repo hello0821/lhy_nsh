@@ -89,7 +89,6 @@ class MessageListActivity : AppCompatActivity() {
         binding = ActivityMessageListBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-
         val cid = checkNotNull(intent.getStringExtra(CID_KEY)) {
             "MessageListActivity를 시작하기 위해서는 채널 아이디 (cid) 정보가 필요합니다."
         }
@@ -181,6 +180,7 @@ class MessageListActivity : AppCompatActivity() {
     companion object {
         // MessageListActivity의 인텐트 생성 및 채팅방의 cid 정보 전달
         private const val CID_KEY = "key:cid"
+
         fun newIntent(context: Context, channel: Channel): Intent =
             Intent(context, MessageListActivity::class.java).putExtra(CID_KEY, channel.cid)
     }

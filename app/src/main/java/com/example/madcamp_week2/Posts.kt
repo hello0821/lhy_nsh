@@ -31,7 +31,7 @@ class Posts : Fragment() {
         //GET /posts
         fullItemList.add(PostItem(0,"프랑스 여행 동행 구함", "신짱구" , "2024-02-01 ~ 2024-02-05","파리, 니스", "같이 여행가요"))
         fullItemList.add(PostItem(1,"이탈리아 여행 동행 구함", "신짱아","2024-02-01 ~ 2024-02-05", "로마, 피렌체", "여러분 여행가요"))
-
+        println(fullItemList)
         item_list.addAll(fullItemList)
 
         postAdapter = PostAdapter(item_list)

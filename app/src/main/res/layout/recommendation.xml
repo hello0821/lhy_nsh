@@ -15,12 +15,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="38dp"
+        android:layout_marginTop="35dp"
+        android:layout_marginBottom="25dp"
         android:gravity="center"
         android:text="여행지 추천"
         android:textColor="@color/white"
         android:textSize="30sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/questionContainer"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -44,9 +45,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="30dp"
             android:text="Q1"
             android:textColor="@color/main"
+            android:textStyle="bold"
             android:textSize="50dp" />
 
         <TextView
@@ -54,22 +56,26 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="10dp"
-            android:text="어느 대륙을 여행하고 싶으신가요?"
-            android:textSize="20dp" />
+            android:layout_marginTop="25dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:text="어느 것을 선호하시나요?"
+            android:textSize="23dp"
+            android:textStyle="bold"/>
 
         <RadioGroup
             android:id="@+id/answersRadioGroup"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_marginTop="20dp">
 
         <RadioButton
             android:id="@+id/selection1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="15dp"
             android:text="아시아"
             android:textSize="15dp" />
 
@@ -77,8 +83,8 @@
             android:id="@+id/selection2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="15dp"
             android:text="유럽"
             android:textSize="15dp" />
 
@@ -86,8 +92,9 @@
             android:id="@+id/selection3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="10dp"
             android:text="북미"
             android:textSize="15dp" />
         </RadioGroup>
@@ -116,8 +123,8 @@
         android:textColor="@color/black"
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/nextBtn"
-        app:layout_constraintTop_toBottomOf="@+id/questionContainer"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         android:stateListAnimator="@null"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
