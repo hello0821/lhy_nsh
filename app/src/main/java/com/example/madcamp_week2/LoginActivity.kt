@@ -25,16 +25,17 @@ import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
 
-data class MyData(
-    val id: String
+data class image(
+    val success: String
 )
 
 data class PostData(
     val _id: String,
-    val identityuri: String,
+    val identityfilename: String,
+    val profilefilename: String,
     val introd: String,
     val name: String,
-    val profileuri: String,
+    val nickname: String,
     val reviews: List<Review>,
     val teamid: List<Int>,
     val temp: String,
