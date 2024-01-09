@@ -2,19 +2,23 @@ package com.example.madcamp_week2
 
 import android.app.AlertDialog
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Button
 import android.widget.EditText
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.example.madcamp_week2.databinding.ActivityChatBinding
 import com.example.madcamp_week2.MessageListActivity
+import com.google.android.material.button.MaterialButton
 import io.getstream.chat.android.client.ChatClient
 import io.getstream.chat.android.client.logger.ChatLogLevel
 import io.getstream.chat.android.client.models.User
+import io.getstream.chat.android.common.state.Edit
 import io.getstream.chat.android.offline.plugin.factory.StreamOfflinePluginFactory
 import io.getstream.chat.android.ui.channel.list.header.viewmodel.ChannelListHeaderViewModel
 import io.getstream.chat.android.ui.channel.list.header.viewmodel.bindView
@@ -54,6 +58,8 @@ class ChatActivity : AppCompatActivity() {
     private var USER_NAME: String = ""
     private var USER_ID: String = ""
     private lateinit var server_token: String
+    var Others_ID: String = ""
+    var CHANNEL_NAME: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -127,9 +133,14 @@ class ChatActivity : AppCompatActivity() {
         val viewModel: ChannelListViewModel by viewModels { viewModelFactory }
         val channelListHeaderViewModel : ChannelListHeaderViewModel by viewModels()
         viewModel.bindView(binding.channelListView, this)
+
         channelListHeaderViewModel.bindView(binding.channelListHeaderView, this)
+
         binding.channelListView.setChannelItemClickListener { channel ->
-            startActivity(MessageListActivity.newIntent(this, channel))
+            val intent = MessageListActivity.newIntent(this, channel)
+            intent.putExtra("others_id", Others_ID)
+            intent.putExtra("my_id", USER_ID)
+            startActivity(intent)
         }
     }
 
@@ -165,27 +176,44 @@ class ChatActivity : AppCompatActivity() {
 
 
     private fun showCreateChannelDialog() {
-        val editText = EditText(this)
-        AlertDialog.Builder(this)
-            .setTitle("새 채널 생성")
-            .setView(editText)
-            .setPositiveButton("생성") { dialog, _ ->
-                val channelName = editText.text.toString()
-                createNewChannel(channelName)
-                dialog.dismiss()
-            }
-            .setNegativeButton("취소") { dialog, _ ->
-                dialog.cancel()
-            }
-            .show()
+        val dialogView = layoutInflater.inflate(R.layout.dialog, null)
+        val alertDialog = AlertDialog.Builder(this)
+            .setView(dialogView)
+            .create()
+
+        val confirmBtn = dialogView.findViewById<Button>(R.id.Addbutton)
+        val cancelBtn = dialogView.findViewById<Button>(R.id.Cancelbutton)
+        val channelName = dialogView.findViewById<EditText>(R.id.channelName).text.toString()
+        val channelOther = dialogView.findViewById<EditText>(R.id.channelOther).text.toString()
+
+        confirmBtn.setOnClickListener {
+            createNewChannel(channelName, channelOther)
+            alertDialog.dismiss()
+        }
+
+        cancelBtn.setOnClickListener {
+            alertDialog.cancel()
+        }
+
+        alertDialog.show()
     }
 
-    private fun createNewChannel(channelName: String) {
+    override fun onNewIntent(intent: Intent) {
+        super.onNewIntent(intent)
+
+        CHANNEL_NAME = checkNotNull(intent.getStringExtra("channel_name"))
+        Others_ID = checkNotNull(intent.getStringExtra("others_id"))
+        createNewChannel(CHANNEL_NAME, Others_ID)
+
+        println("channel name" + CHANNEL_NAME)
+    }
+
+    private fun createNewChannel(channelName: String, otherid: String) {
         val channelId = "channel_${System.currentTimeMillis()}"
         client.createChannel(
             channelType = "messaging",
             channelId = channelId,
-            memberIds = listOf("10", user.id),
+            memberIds = listOf(otherid, user.id),
             extraData = mapOf("name" to channelName)
         ).enqueue {
             if (it.isSuccess) {

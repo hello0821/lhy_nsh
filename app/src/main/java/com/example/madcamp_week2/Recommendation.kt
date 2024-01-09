@@ -15,14 +15,15 @@ import androidx.appcompat.app.AppCompatActivity
 import org.w3c.dom.Text
 
 data class QuestionItem(
+    val qNumber: String,
     val question: String,
     val answers: List<String>
 )
 
 val questions = listOf(
-    QuestionItem("당신의 체력은?", listOf("장거리 비행도 거뜬", "단거리 비행만 할래요", "비행도 힘들다, 국내가 좋아")),
-    QuestionItem("어느 것을 선호하시나요?", listOf("뷰맛집, 청정한 자연환경", "다양한 맛집", "관광 및 유적지 탐험")),
-    QuestionItem("누구와 함께하고 싶나요?", listOf("가족", "친구", "연인")),
+    QuestionItem("Q1","당신의 체력은?", listOf("장거리 비행도 거뜬", "단거리 비행만 할래요", "비행도 힘들다, 국내가 좋아")),
+    QuestionItem("Q2","어느 것을 선호하시나요?", listOf("뷰맛집, 청정한 자연환경", "다양한 맛집", "관광 및 유적지 탐험")),
+    QuestionItem("Q3", "누구와 함께하고 싶나요?", listOf("가족", "친구", "연인")),
 
 )
 
@@ -38,10 +39,12 @@ class Recommendation : Fragment() {
         val view = inflater.inflate(R.layout.recommendation, container, false)
         val nextBtn = view.findViewById<Button>(R.id.nextBtn)
         val submitBtn = view.findViewById<Button>(R.id.submitBtn)
+        val qNum = view.findViewById<TextView>(R.id.qNumber)
         val question = view?.findViewById<TextView>(R.id.question)
         val selection1 = view?.findViewById<RadioButton>(R.id.selection1)
         val selection2 = view?.findViewById<RadioButton>(R.id.selection2)
         val selection3 = view?.findViewById<RadioButton>(R.id.selection3)
+        qNum?.text = questions[0].qNumber
         question?.text = questions[0].question
         selection1?.text = questions[0].answers[0]
         selection2?.text = questions[0].answers[1]
@@ -91,7 +94,6 @@ class Recommendation : Fragment() {
                 .addToBackStack(null)
                 .commit()
 
-            (activity as MainActivity)?.moveToTab(0)
         }
 
         updateQuestion()
@@ -100,10 +102,22 @@ class Recommendation : Fragment() {
         return view
     }
 
+    override fun onResume() {
+        super.onResume()
+        resetQuiz()
+    }
+
+    private fun resetQuiz() {
+        currentQuestionIndex = 0
+        userResponses.clear()
+        updateQuestion()
+    }
+
     private fun updateQuestion() {
         val radioGroup = view?.findViewById<RadioGroup>(R.id.answersRadioGroup)
         val nextBtn = view?.findViewById<Button>(R.id.nextBtn)
         val submitBtn = view?.findViewById<Button>(R.id.submitBtn)
+        val qNum = view?.findViewById<TextView>(R.id.qNumber)
         val question = view?.findViewById<TextView>(R.id.question)
         val selection1 = view?.findViewById<RadioButton>(R.id.selection1)
         val selection2 = view?.findViewById<RadioButton>(R.id.selection2)
@@ -111,6 +125,7 @@ class Recommendation : Fragment() {
 
         if (currentQuestionIndex < questions.size) {
             val currentQuestion = questions[currentQuestionIndex]
+            qNum?.text = currentQuestion.qNumber
             question?.text = currentQuestion.question
             selection1?.text = currentQuestion.answers[0]
             selection2?.text = currentQuestion.answers[1]

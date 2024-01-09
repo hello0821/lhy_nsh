@@ -6,9 +6,10 @@
     android:background="@drawable/edittext_border"
     android:orientation="vertical">
     <TextView
-        android:layout_marginTop="3dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingTop="8dp"
+        android:paddingLeft="10dp"
         android:text="누구의 리뷰입니다"
         android:textSize="15sp"
         android:textStyle="bold"
@@ -19,6 +20,8 @@
         android:layout_marginTop="3dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingTop="3dp"
+        android:paddingLeft="10dp"
         android:text="리뷰 내용이 여기에 나타납니다."
         android:textSize="10sp"
         android:textColor="@color/pointcolor"

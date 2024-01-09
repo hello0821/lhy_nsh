@@ -231,6 +231,7 @@ class MessageListActivity : AppCompatActivity() {
     companion object {
         // MessageListActivity의 인텐트 생성 및 채팅방의 cid 정보 전달
         private const val CID_KEY = "key:cid"
+
         fun newIntent(context: Context, channel: Channel): Intent =
             Intent(context, MessageListActivity::class.java).putExtra(CID_KEY, channel.cid)
     }

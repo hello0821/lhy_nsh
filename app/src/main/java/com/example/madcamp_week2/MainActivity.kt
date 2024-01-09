@@ -35,7 +35,6 @@ class MainActivity : AppCompatActivity() {
         if (intent.hasExtra("currentState")) {
             teamState = intent.getStringExtra("currentState")
         }
-        println("before moving " + teamState)
         handleIntent(intent)
     }
 
@@ -106,6 +105,17 @@ class MainActivity : AppCompatActivity() {
                 // 이미 선택된 탭이 다시 선택되었을 때의 동작
             }
         })
+    }
+
+    fun moveToPostsFragment() {
+        viewPager.currentItem = 0 // "Posts" 탭의 인덱스로 설정
+        val currentFragment = supportFragmentManager.findFragmentById(R.id.totalResultView)
+        if (currentFragment is ResultRecommendation) {
+            val postFragment = Posts()
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.totalResultView, postFragment)
+                .commit()
+        }
     }
     fun moveToTab(tabIndex: Int) {
         viewPager.setCurrentItem(tabIndex, true)

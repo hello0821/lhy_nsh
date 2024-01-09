@@ -3,6 +3,8 @@ package com.example.madcamp_week2
 import android.content.Intent
 import android.content.IntentSender
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -26,12 +28,7 @@ class ResultRecommendation : Fragment() {
         resultCountryText.text = recommendedCountry
 
         moveToPost.setOnClickListener {
-            val postFragment = Posts()
-            val transaction = parentFragmentManager.beginTransaction()
-            transaction.replace(R.id.totalResultView, postFragment)
-            transaction.addToBackStack(null)
-            transaction.commit()
-
+            (activity as? MainActivity)?.moveToPostsFragment()
         }
 
         return view

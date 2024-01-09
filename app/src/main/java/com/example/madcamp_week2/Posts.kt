@@ -53,6 +53,7 @@ class Posts : Fragment() {
         rv_list = view.findViewById(R.id.rv_list)
         val add_write_btn = view.findViewById<Button>(R.id.writePostBtn)
         val searchView = view.findViewById<SearchView>(R.id.search)
+
         postAdapter = PostAdapter(item_list)
         //GET /posts
         lifecycleScope.launch {
