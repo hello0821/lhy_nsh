@@ -50,7 +50,7 @@ class ChatActivity : AppCompatActivity() {
     private lateinit var mRetrofitAPI: chatapi
 
     private var USER_NAME: String = ""
-    private var USER_ID: Int = 0
+    private var USER_ID: String = ""
     private lateinit var server_token: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -58,7 +58,7 @@ class ChatActivity : AppCompatActivity() {
 
         sharedPreferences = applicationContext.getSharedPreferences("my_preferences", Context.MODE_PRIVATE)
         mretrofit = Retrofit.Builder()
-            .baseUrl("http://143.248.191.200:5000/")
+            .baseUrl(BASEURL)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
         mRetrofitAPI = mretrofit.create(chatapi::class.java)
