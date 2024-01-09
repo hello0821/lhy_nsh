@@ -133,6 +133,7 @@ class WritePost : Fragment() {
                 loc.toString(), content.toString(), formattedDate1,formattedDate2 , writerid)
             println(posting)
             sendtoserver1(posting, imagefile)
+
             // api 연결 성공 후 다시 postlist로 돌아감
             val postfragment = Posts()
             val fragmentManager = requireActivity().supportFragmentManager
