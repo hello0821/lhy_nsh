@@ -51,6 +51,10 @@ interface mypageapi {
     @POST("/imagetoserver")
     fun imagetoserver( @Part image: MultipartBody.Part,
         @Header("Authorization") token:String): Call<image>
+    @Multipart
+    @POST("/profileimagetoserver")
+    fun profileimagetoserver( @Part image: MultipartBody.Part,
+                       @Header("Authorization") token:String): Call<image>
 
     @GET("/getimage/{filename}")
     fun getImage(
@@ -75,6 +79,7 @@ class Mypage : Fragment() {
     private lateinit var resultLauncher2: ActivityResultLauncher<String>
     private lateinit var storedToken: String
     private lateinit var imagebutton: ImageButton
+    private lateinit var profilebutton: ImageButton
     private lateinit var fileurl: String
 
     override fun onCreateView(
@@ -96,26 +101,41 @@ class Mypage : Fragment() {
             // 갤러리에서 이미지 선택
             resultLauncher1.launch("image/*")
         }
+        view.findViewById<ImageButton>(R.id.profile__image).setOnClickListener{
+            resultLauncher2.launch("image/*")
+        }
         imagebutton = view.findViewById(R.id.imagebutton)
+        profilebutton = view.findViewById(R.id.profile__image)
         return view
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        sharedPreferences = requireActivity().getSharedPreferences("my_preferences", Context.MODE_PRIVATE)
+        sharedPreferences =
+            requireActivity().getSharedPreferences("my_preferences", Context.MODE_PRIVATE)
         storedToken = getStoredToken()
         val headers = HashMap<String, String>()
         headers["Authorization"] = "Bearer $storedToken"
-        resultLauncher1 = registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
-            // 선택된 이미지의 URI를 ImageView에 설정
-            uri?.let {
+        resultLauncher1 =
+            registerForActivityResult(ActivityResultContracts.GetContent()) { uri1: Uri? ->
+                // 선택된 이미지의 URI를 ImageView에 설정
+                uri1?.let {
 //                val imageView = view?.findViewById<ImageButton>(R.id.imagebutton)
 //                imageView?.setImageURI(uri)
 //                imageLink = uri
-                imgaetoserver(storedToken, uri)
+                    imgaetoserver(storedToken, uri1, 1)
+                }
             }
-
-        }
+        resultLauncher2 =
+            registerForActivityResult(ActivityResultContracts.GetContent()) { uri2: Uri? ->
+                // 선택된 이미지의 URI를 ImageView에 설정
+                uri2?.let {
+//                val imageView = view?.findViewById<ImageButton>(R.id.imagebutton)
+//                imageView?.setImageURI(uri)
+//                imageLink = uri
+                    imgaetoserver(storedToken, uri2, 2)
+                }
+            }
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -163,8 +183,11 @@ class Mypage : Fragment() {
                                 updateRecyclerView(reviewItemlist)
                             }
                             if(it.identityfilename !=""){
-                                displayImageInfoFromServer(it.identityfilename)
+                                displayImageInfoFromServer(it.identityfilename, 1)
                                 println("여기까진 들어왔는데;;")
+                            }
+                            if(it.profilefilename != ""){
+                                displayImageInfoFromServer(it.identityfilename, 2)
                             }
                         }
                     }
@@ -179,30 +202,56 @@ class Mypage : Fragment() {
 
         })
     }
-    private fun imgaetoserver(token:String, uri: Uri){
-        val imagefile = prepareImageFilePart(requireContext(), "image", uri)
-        val call1: Call<image> = mRetrofitAPI.imagetoserver(imagefile, token)
-        call1.enqueue(object : Callback<image>{
-            override fun onResponse(call: Call<image>, response: Response<image>) {
-                if(response.isSuccessful){
-                    Log.d("이미지 업로드 성공", "나이스")
-                    val info = response.body()
-                    info?.let{
-                        fileurl = it.success
+    private fun imgaetoserver(token:String, uri: Uri, temp: Int){
+        if(temp ==1){
+            val imagefile = prepareImageFilePart(requireContext(), "image", uri)
+            val call1: Call<image> = mRetrofitAPI.imagetoserver(imagefile, token)
+            call1.enqueue(object : Callback<image>{
+                override fun onResponse(call: Call<image>, response: Response<image>) {
+                    if(response.isSuccessful){
+                        Log.d("이미지 업로드 성공", "나이스")
+                        val info = response.body()
+                        info?.let{
+                            fileurl = it.success
+                        }
+                        displayImageInfoFromServer(fileurl, temp)
                     }
-                    displayImageInfoFromServer(fileurl)
+                    else{
+                        println("response가 성공적이지 않음")
+                    }
                 }
-                else{
-                    println("response가 성공적이지 않음")
+
+                override fun onFailure(call: Call<image>, t: Throwable) {
+                    println("뭔가 이상함")
                 }
             }
-
-            override fun onFailure(call: Call<image>, t: Throwable) {
-                println("뭔가 이상함")
-            }
-
+            )
         }
-        )
+        else{
+            val imagefile = prepareImageFilePart(requireContext(), "image", uri)
+            val call1: Call<image> = mRetrofitAPI.profileimagetoserver(imagefile, token)
+            call1.enqueue(object : Callback<image>{
+                override fun onResponse(call: Call<image>, response: Response<image>) {
+                    if(response.isSuccessful){
+                        Log.d("이미지 업로드 성공", "나이스")
+                        val info = response.body()
+                        info?.let{
+                            fileurl = it.success
+                        }
+                        displayImageInfoFromServer(fileurl, temp)
+                    }
+                    else{
+                        println("response가 성공적이지 않음")
+                    }
+                }
+                override fun onFailure(call: Call<image>, t: Throwable) {
+                    println("뭔가 이상함")
+                }
+
+            }
+            )
+        }
+
     }
     private fun updateRecyclerView(reviewItemList: List<ReviewItem>) {
         // RecyclerView에 데이터 업데이트
@@ -224,23 +273,35 @@ class Mypage : Fragment() {
         cursor?.close()
         return filePath
     }
-    private fun displayImageInfoFromServer(url: String) {
+    private fun displayImageInfoFromServer(url: String, temp1: Int) {
         activity?.runOnUiThread {
-            displayImage(url)
+            displayImage(url, temp1)
         }
     }
-    private fun displayImage(imageurl: String) {
+    private fun displayImage(imageurl: String, temp2: Int) {
         if (imageurl != null) {
             // ByteArray를 Bitmap으로 변환
             // ImageView에 Bitmap 표시
             println(imageurl)
-            activity?.runOnUiThread{
-                Glide.with(this)
-                    .load(imageurl)
+            if(temp2 == 1){
+                activity?.runOnUiThread{
+                    Glide.with(this)
+                        .load(imageurl)
 //                    .placeholder(R.drawable.placeholder) // 로딩 중에 표시할 이미지
 //                    .error(R.drawable.error) // 이미지 로딩 실패 시 표시할 이미지
-                    .into(imagebutton)
+                        .into(imagebutton)
+                }
             }
+            else{
+                activity?.runOnUiThread{
+                    Glide.with(this)
+                        .load(imageurl)
+//                    .placeholder(R.drawable.placeholder) // 로딩 중에 표시할 이미지
+//                    .error(R.drawable.error) // 이미지 로딩 실패 시 표시할 이미지
+                        .into(profilebutton)
+                }
+            }
+
         } else {
             // 이미지 데이터가 null이면 기본 이미지를 설정하거나 처리할 로직을 추가할 수 있습니다.
             // imageView.setImageResource(R.drawable.default_image)

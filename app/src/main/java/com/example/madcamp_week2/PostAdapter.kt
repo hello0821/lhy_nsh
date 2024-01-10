@@ -19,14 +19,9 @@ import retrofit2.http.Query
 data class check_url(
     val success: String
 )
-interface postadapterapi{
-    @GET("/getpostimage")
-    fun getpostimage(
-        @Query("postid") postid: String): Call<check_url>
-}
 
-private lateinit var mretrofit: Retrofit
-private lateinit var mRetrofitAPI: postadapterapi
+
+
 class PostAdapter(private var postList: ArrayList<PostItem>) : RecyclerView.Adapter<PostAdapter.PostViewHolder>()
 {
     interface OnItemClickListener {
