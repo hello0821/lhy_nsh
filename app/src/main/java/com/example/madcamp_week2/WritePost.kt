@@ -2,6 +2,7 @@ package com.example.madcamp_week2
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.media.Image
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
@@ -103,6 +104,7 @@ class WritePost : Fragment() {
         val content = view.findViewById<EditText>(R.id.writeContent).text
         val date1 = view.findViewById<DatePicker>(R.id.datePicker1)
         val date2 = view.findViewById<DatePicker>(R.id.datePicker2)
+        val postimg = view.findViewById<ImageView>(R.id.viewSelectedPic)
         val year1 = date1.year
         val month1=date1.month
         val day1=date1.dayOfMonth
@@ -126,6 +128,7 @@ class WritePost : Fragment() {
         writeBtn.setOnClickListener {
             println("여기를 주목하세요~!~!~! ${imageLink}")
             val imagefile = prepareImageFilePart(requireContext(), "image", imageLink)
+
             //POST /post 로 백과 소통
             //버튼 클릭 시, title, loc, content, date, image, writer 에 대한 정보를 서버에 저장
             println("user id is ${writerid}")

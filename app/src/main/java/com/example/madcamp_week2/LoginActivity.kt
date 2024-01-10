@@ -37,7 +37,7 @@ data class PostData(
     val name: String,
     val nickname: String,
     val reviews: List<Review>,
-    val teamid: List<Int>,
+    val teamid: List<String>,
     val temp: String,
     val type: String
 )
