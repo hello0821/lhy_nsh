@@ -8,7 +8,11 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
+import kotlinx.coroutines.async
+import kotlinx.coroutines.launch
 import okhttp3.ResponseBody
 import org.bson.types.ObjectId
 import retrofit2.Call
@@ -21,6 +25,7 @@ import retrofit2.http.POST
 import retrofit2.http.Path
 import retrofit2.http.Query
 
+var text = ""
 interface reviewapi{
     @POST("/addReview")
     fun addReview(
@@ -31,6 +36,11 @@ interface reviewapi{
     @GET("/getimage/{filename}")
     fun getImage(
         @Path("filename") filename: String): Call<ResponseBody>
+
+    @GET("/getnamefromid")
+    suspend fun getname(@Query("id") id: ObjectId): Response<check_input>
+
+
 }
 class ReviewFragment: Fragment() {
     var mretrofit = Retrofit.Builder()
@@ -40,7 +50,28 @@ class ReviewFragment: Fragment() {
     var mRetrofitAPI = mretrofit.create(reviewapi::class.java)
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        val otherid = ObjectId((activity as MainActivity) ?.otheruserid ?: "")
+        lifecycleScope.launch{
+            val getUserInfoDeferred = async { getname(otherid) }
+            getUserInfoDeferred.await() // getUserInfo 함수가 완료될 때까지 기다립니다.
+            view?.findViewById<TextView>(R.id.userName)?.text = text
+        }
+
         super.onCreate(savedInstanceState)
+    }
+    private suspend fun getname(id: ObjectId){
+        try{
+            val response = mRetrofitAPI.getname(id)
+            if(response.isSuccessful) {
+                val responsedata = response.body()
+                if (responsedata != null) {
+                    text = responsedata.name
+                }
+            }
+        }
+        catch(e: Exception){
+            Log.e("1","${e.localizedMessage}")
+        }
     }
 
     override fun onCreateView(

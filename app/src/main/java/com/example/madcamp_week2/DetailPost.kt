@@ -48,6 +48,7 @@ class DetailPost : Fragment() {
         val loc = view.findViewById<TextView>(R.id.detailLoc)
         val content = view.findViewById<TextView>(R.id.detailContent)
         val chatBtn = view.findViewById<Button>(R.id.moveToChatBtn)
+        println("여기 잘 봐야합니다" + item?.imgfilename)
 
         title.text = item?.title
         date1.text = item?.date1
@@ -55,8 +56,9 @@ class DetailPost : Fragment() {
         loc.text = item?.location
         content.text = item?.content
 
-        Glide.with(this)
-            .load(item?.imgfilename) // imageUrl은 PostItem에서 실제 이미지 URL을 가져오는 메서드 또는 속성으로 변경 필요
+        Glide.with(requireContext())
+            .load(item?.imgfilename)
+            // imageUrl은 PostItem에서 실제 이미지 URL을 가져오는 메서드 또는 속성으로 변경 필요
             .into(image)
 
         mretrofit = Retrofit.Builder()
@@ -73,7 +75,7 @@ class DetailPost : Fragment() {
                 }
             }
             override fun onFailure(call: Call<postpost>, t: Throwable) {
-                TODO("Not yet implemented")
+                println("오류발생")
             }
 
         })
