@@ -44,6 +44,7 @@ dependencies {
     implementation ("io.getstream:stream-chat-android-ui-components:5.0.2")
     implementation ("androidx.activity:activity-ktx:1.4.0")
 
+    implementation ("org.mongodb:mongo-java-driver:3.12.7")
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.11.0")

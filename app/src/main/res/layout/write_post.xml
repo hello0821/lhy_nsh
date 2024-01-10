@@ -1,265 +1,251 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/totalWriteView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
-    tools:context=".WritePost"
-    android:clickable="true">
+    android:id="@+id/totalWriteView">
 
-        <Button
-            android:id="@+id/addPostBtn"
-            android:layout_width="120dp"
-            android:layout_height="40dp"
-            android:layout_marginBottom="50dp"
-            android:background="@drawable/green_rectangle"
-            android:stateListAnimator="@null"
-            android:text="글 작성하기"
-            android:textColor="@color/white"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cardView6" />
-
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="45dp"
-            android:layout_marginBottom="20dp"
-            android:gravity="center"
-            android:text="게시글 작성"
-            android:textColor="@color/main"
-            android:textSize="25sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/linearLayout6"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-
-        <LinearLayout
-            android:id="@+id/linearLayout6"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="10dp"
-            android:orientation="horizontal"
-            app:layout_constraintBottom_toTopOf="@+id/cardView3"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView2">
-
-                <TextView
-                    android:id="@+id/textView3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="15"
-                    android:text="사진을 추가해주세요"
-                    android:textSize="15sp"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView2" />
-
-                <Button
-                    android:id="@+id/addPicBtn"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:background="@drawable/green_rectangle"
-                    android:stateListAnimator="@null"
-                    android:text="+"
-                    android:textColor="@color/white"
-                    app:layout_constraintStart_toEndOf="@+id/textView3"
-                    app:layout_constraintTop_toTopOf="parent" />
-        </LinearLayout>
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cardView3"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            android:layout_marginBottom="24dp"
-            app:cardCornerRadius="20dp"
-            app:cardElevation="20dp"
-            app:layout_constraintBottom_toTopOf="@+id/textView4"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout6"
-            android:stateListAnimator="@null"
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             >
 
-                <ImageView
-                    android:id="@+id/viewSelectedPic"
+                <LinearLayout
+
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    tools:layout_editor_absoluteX="25dp"
-                    tools:layout_editor_absoluteY="113dp" />
+                    android:background="@color/white"
+                    android:clickable="true"
+                    android:orientation="vertical"
+                    tools:context=".WritePost">
 
-        </androidx.cardview.widget.CardView>
-
-        <TextView
-            android:id="@+id/textView4"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            android:layout_marginBottom="10dp"
-            android:layout_weight="15"
-            android:text="자세한 내용을 적어주세요"
-            android:textSize="15sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/cardView4"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cardView3" />
-
-
-        <LinearLayout
-            android:id="@+id/linearLayout7"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            android:layout_marginBottom="25dp"
-            android:orientation="horizontal"
-            app:layout_constraintBottom_toTopOf="@+id/linearLayout8"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cardView4">
-
-                <TextView
-                    android:id="@+id/textView8"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginRight="30dp"
-                    android:text="여행 시작 날짜"
-                    android:textSize="15sp"
-                    android:textStyle="bold" />
-
-                <DatePicker
-                    android:id="@+id/datePicker1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="80dp"
-                    android:calendarViewShown="false"
-                    android:datePickerMode="spinner" />
+                        <TextView
+                            android:id="@+id/textView2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginTop="35dp"
+                            android:layout_marginBottom="20dp"
+                            android:gravity="center"
+                            android:text="게시글 작성"
+                            android:textColor="@color/main"
+                            android:textSize="25sp"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toTopOf="@+id/linearLayout6"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
 
 
-        </LinearLayout>
+                        <LinearLayout
+                            android:id="@+id/linearLayout6"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginEnd="16dp"
+                            android:layout_marginBottom="10dp"
+                            android:orientation="horizontal"
+                            app:layout_constraintBottom_toTopOf="@+id/cardView3"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView2">
 
-        <LinearLayout
-            android:id="@+id/linearLayout8"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            android:layout_marginBottom="20dp"
-            android:orientation="horizontal"
-            app:layout_constraintBottom_toTopOf="@+id/cardView5"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout7">
+                                <TextView
+                                    android:id="@+id/textView3"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="15"
+                                    android:text="사진을 추가해주세요"
+                                    android:textSize="15sp"
+                                    android:textStyle="bold"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginRight="30dp"
-                    android:text="여행 종료 날짜"
-                    android:textSize="15sp"
-                    android:textStyle="bold" />
+                                <Button
+                                    android:id="@+id/addPicBtn"
+                                    android:layout_width="25dp"
+                                    android:layout_height="25dp"
+                                    android:background="@drawable/green_rectangle"
+                                    android:stateListAnimator="@null"
+                                    android:text="+"
+                                    android:textColor="@color/white"
+                                    app:layout_constraintStart_toEndOf="@+id/textView3"
+                                    app:layout_constraintTop_toTopOf="parent" />
+                        </LinearLayout>
 
-                <DatePicker
-                    android:id="@+id/datePicker2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="80dp"
-                    android:calendarViewShown="false"
-                    android:datePickerMode="spinner" />
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/cardView3"
+                            android:layout_width="match_parent"
+                            android:layout_height="80dp"
+                            android:layout_marginStart="20dp"
+                            android:layout_marginEnd="20dp"
+                            android:layout_marginBottom="24dp"
+                            android:background="@drawable/shadow"
+                            android:stateListAnimator="@null"
+                            app:cardCornerRadius="20dp"
+                            app:layout_constraintBottom_toTopOf="@+id/textView4"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/linearLayout6">
 
-        </LinearLayout>
+                                <ImageView
+                                    android:id="@+id/viewSelectedPic"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:stateListAnimator="@null"
+                                    tools:layout_editor_absoluteX="25dp"
+                                    tools:layout_editor_absoluteY="113dp" />
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cardView4"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            android:layout_marginBottom="23dp"
-            app:cardCornerRadius="10dp"
-            app:cardElevation="20dp"
-            app:layout_constraintBottom_toTopOf="@+id/linearLayout7"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView4"
-            android:stateListAnimator="@null">
+                        </androidx.cardview.widget.CardView>
 
-                <EditText
-                    android:id="@+id/writeTitle"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="10dp"
-                    android:background="@null"
-                    android:hint="제목을 적어주세요."
-                    android:textSize="15sp"
-                    tools:layout_editor_absoluteY="266dp" />
-        </androidx.cardview.widget.CardView>
+                        <TextView
+                            android:id="@+id/textView4"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_marginStart="20dp"
+                            android:layout_marginEnd="20dp"
+                            android:layout_marginBottom="10dp"
+                            android:layout_weight="15"
+                            android:text="자세한 내용을 적어주세요"
+                            android:textSize="15sp"
+                            android:textStyle="bold" />
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cardView5"
-            android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            android:layout_marginBottom="10dp"
-            app:cardCornerRadius="10dp"
-            app:cardElevation="20dp"
-            app:layout_constraintBottom_toTopOf="@+id/cardView6"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout8"
-            android:stateListAnimator="@null">
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/cardView4"
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginRight="20dp"
+                            android:layout_marginBottom="23dp"
+                            android:background="@drawable/shadow"
+                            android:stateListAnimator="@null"
+                            app:cardCornerRadius="10dp">
 
-                <EditText
-                    android:id="@+id/writeLoc"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="10dp"
-                    android:background="@null"
-                    android:hint="여행 장소를 적어주세요. "
-                    android:textSize="15sp"
-                    tools:layout_editor_absoluteY="501dp" />
-        </androidx.cardview.widget.CardView>
+                                <EditText
+                                    android:id="@+id/writeTitle"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginLeft="10dp"
+                                    android:background="@null"
+                                    android:hint="제목을 적어주세요."
+                                    android:textSize="15sp"
+                                    tools:layout_editor_absoluteY="266dp" />
+                        </androidx.cardview.widget.CardView>
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cardView6"
-            android:layout_width="0dp"
-            android:layout_height="70dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            android:layout_marginBottom="10dp"
-            app:cardCornerRadius="10dp"
-            app:cardElevation="20dp"
-            app:layout_constraintBottom_toTopOf="@+id/addPostBtn"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cardView5"
-            android:stateListAnimator="@null">
+                        <LinearLayout
+                            android:id="@+id/linearLayout7"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="20dp"
+                            android:layout_marginEnd="20dp"
+                            android:layout_marginBottom="10dp"
+                            android:orientation="horizontal">
 
-                <EditText
-                    android:id="@+id/writeContent"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="10dp"
-                    android:background="@null"
-                    android:hint="자세한 여행 내용을 적어주세요. "
-                    android:textSize="15sp"
-                    tools:layout_editor_absoluteY="584dp" />
-        </androidx.cardview.widget.CardView>
+                                <TextView
+                                    android:id="@+id/textView8"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:layout_marginRight="30dp"
+                                    android:text="여행 시작 날짜"
+                                    android:textSize="15sp"
+                                    android:textStyle="bold" />
+
+                                <DatePicker
+                                    android:id="@+id/datePicker1"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="120dp"
+                                    android:background="@drawable/shadow"
+                                    android:calendarViewShown="false"
+                                    android:datePickerMode="spinner" />
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/linearLayout8"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="20dp"
+                            android:layout_marginEnd="20dp"
+                            android:layout_marginBottom="20dp"
+                            android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:layout_marginRight="30dp"
+                                    android:text="여행 종료 날짜"
+                                    android:textSize="15sp"
+                                    android:textStyle="bold" />
+
+                                <DatePicker
+                                    android:id="@+id/datePicker2"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="120dp"
+                                    android:background="@drawable/shadow"
+                                    android:calendarViewShown="false"
+                                    android:datePickerMode="spinner" />
+
+                        </LinearLayout>
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/cardView5"
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:layout_marginStart="20dp"
+                            android:layout_marginEnd="20dp"
+                            android:layout_marginBottom="10dp"
+                            android:background="@drawable/shadow"
+                            app:cardCornerRadius="10dp">
+
+                                <EditText
+                                    android:id="@+id/writeLoc"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginLeft="10dp"
+                                    android:background="@null"
+                                    android:hint="여행 장소를 적어주세요. "
+                                    android:textSize="15sp"
+                                    tools:layout_editor_absoluteY="501dp" />
+                        </androidx.cardview.widget.CardView>
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/cardView6"
+                            android:layout_width="match_parent"
+                            android:layout_height="40sp"
+                            android:layout_marginStart="20dp"
+                            android:layout_marginEnd="20dp"
+                            android:layout_marginBottom="11dp"
+                            android:background="@drawable/shadow"
+                            app:cardCornerRadius="10dp">
+
+                                <EditText
+                                    android:id="@+id/writeContent"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginLeft="10dp"
+                                    android:background="@null"
+                                    android:hint="자세한 여행 내용을 적어주세요. "
+                                    android:textSize="15sp"
+                                    tools:layout_editor_absoluteY="584dp" />
+                        </androidx.cardview.widget.CardView>
+
+                        <Button
+                            android:id="@+id/addPostBtn"
+                            android:layout_width="120dp"
+                            android:layout_height="40dp"
+                            android:layout_marginBottom="60dp"
+                            android:layout_marginTop="20dp"
+                            android:background="@drawable/green_rectangle"
+                            android:stateListAnimator="@null"
+                            android:text="글 작성하기"
+                            android:textColor="@color/white"
+                            android:layout_gravity="center"/>
+
+
+                </LinearLayout>
+        </ScrollView>
+</FrameLayout>
