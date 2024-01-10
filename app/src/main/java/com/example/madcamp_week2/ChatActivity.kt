@@ -30,6 +30,7 @@ import io.getstream.chat.android.ui.search.list.viewmodel.SearchViewModel
 import io.getstream.chat.android.ui.search.list.viewmodel.bindView
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
+import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -37,6 +38,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Header
+import retrofit2.http.Path
 import kotlin.properties.Delegates
 
 //import io.getstream.chatapplication.databinding.ActivityMainBinding
@@ -58,6 +60,7 @@ class ChatActivity : AppCompatActivity() {
 
     private var USER_NAME: String = ""
     private var USER_ID: String = ""
+    private var USER_PROFILE: String = ""
     private lateinit var server_token: String
     var Others_ID: String = "no"
     var CHANNEL_NAME: String = ""
@@ -85,6 +88,7 @@ class ChatActivity : AppCompatActivity() {
         lifecycleScope.launch {
             val getUserInfoDeferred = async { getUserInfo(server_token) }
             getUserInfoDeferred.await() // getUserInfo 함수가 완료될 때까지 기다립니다.
+
             setUpUI()
         }
 
@@ -113,7 +117,7 @@ class ChatActivity : AppCompatActivity() {
         user = User(
             id = USER_ID,
             name = USER_NAME,
-            image = "https://bit.ly/2TIt8NR"
+            image = USER_PROFILE
         )
 
         val token: String = server_token
@@ -186,6 +190,7 @@ class ChatActivity : AppCompatActivity() {
                 userInfo?.let {
                     USER_NAME = it.name
                     USER_ID = it._id
+                    USER_PROFILE = it.profilefilename
                 }
             } else {
                 Log.e("fail get user info", "Error message: ${response.errorBody()}")
