@@ -114,7 +114,7 @@ class Posts : Fragment() {
             val response = mRetrofitAPI.getpost()
             if(response.isSuccessful){
                 val data = response.body()
-
+                
                 fullItemList.clear()
                 data?.forEach { i ->
                     fullItemList.add(PostItem(i._id, i.content, i.date1, i.date2, i.imgfilename,

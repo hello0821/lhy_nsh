@@ -20,6 +20,10 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
+import com.bumptech.glide.GlideBuilder
+import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.request.RequestOptions
 import okhttp3.MediaType
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
@@ -67,10 +71,11 @@ class Mypage : Fragment() {
     private lateinit var rv_list1: RecyclerView
     private val item_list1 = ArrayList<ReviewItem>()
     private val fullItemList1 = ArrayList<ReviewItem>()
-    private lateinit var resultLauncher: ActivityResultLauncher<String>
+    private lateinit var resultLauncher1: ActivityResultLauncher<String>
+    private lateinit var resultLauncher2: ActivityResultLauncher<String>
     private lateinit var storedToken: String
     private lateinit var imagebutton: ImageButton
-    private lateinit var filename: String
+    private lateinit var fileurl: String
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -89,7 +94,7 @@ class Mypage : Fragment() {
         rv_list1.addItemDecoration(ItemSpacingDecoration(20))
         view.findViewById<ImageButton>(R.id.imagebutton).setOnClickListener {
             // 갤러리에서 이미지 선택
-            resultLauncher.launch("image/*")
+            resultLauncher1.launch("image/*")
         }
         imagebutton = view.findViewById(R.id.imagebutton)
         return view
@@ -101,7 +106,7 @@ class Mypage : Fragment() {
         storedToken = getStoredToken()
         val headers = HashMap<String, String>()
         headers["Authorization"] = "Bearer $storedToken"
-        resultLauncher = registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
+        resultLauncher1 = registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
             // 선택된 이미지의 URI를 ImageView에 설정
             uri?.let {
 //                val imageView = view?.findViewById<ImageButton>(R.id.imagebutton)
@@ -183,9 +188,9 @@ class Mypage : Fragment() {
                     Log.d("이미지 업로드 성공", "나이스")
                     val info = response.body()
                     info?.let{
-                        filename = it.success
+                        fileurl = it.success
                     }
-                    displayImageInfoFromServer(filename)
+                    displayImageInfoFromServer(fileurl)
                 }
                 else{
                     println("response가 성공적이지 않음")
@@ -219,39 +224,22 @@ class Mypage : Fragment() {
         cursor?.close()
         return filePath
     }
-    private fun displayImageInfoFromServer(filename: String) {
-        val call: Call<ResponseBody> = mRetrofitAPI.getImage(filename)
-        call.enqueue(object : Callback<ResponseBody> {
-            override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
-                if (response.isSuccessful) {
-                    // 이미지 데이터를 ByteArray로 변환
-                    val imageBytes = response.body()?.bytes()
-
-                    // UI 스레드에서 이미지 표시
-                    activity?.runOnUiThread {
-                        displayImage(imageBytes)
-                    }
-                }
-                else {
-                    // 실패 시의 처리
-                    if(response.code()==404){
-                    }
-                }
-            }
-
-            override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
-                t.printStackTrace()
-            }
-        })
+    private fun displayImageInfoFromServer(url: String) {
+        activity?.runOnUiThread {
+            displayImage(url)
+        }
     }
-    private fun displayImage(imageBytes: ByteArray?) {
-        if (imageBytes != null) {
+    private fun displayImage(imageurl: String) {
+        if (imageurl != null) {
             // ByteArray를 Bitmap으로 변환
-            val bitmap = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.size)
-
             // ImageView에 Bitmap 표시
+            println(imageurl)
             activity?.runOnUiThread{
-                imagebutton.setImageBitmap(bitmap)
+                Glide.with(this)
+                    .load(imageurl)
+//                    .placeholder(R.drawable.placeholder) // 로딩 중에 표시할 이미지
+//                    .error(R.drawable.error) // 이미지 로딩 실패 시 표시할 이미지
+                    .into(imagebutton)
             }
         } else {
             // 이미지 데이터가 null이면 기본 이미지를 설정하거나 처리할 로직을 추가할 수 있습니다.
