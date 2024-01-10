@@ -40,8 +40,8 @@ class DetailPost : Fragment() {
         chatBtn.setOnClickListener {
             val intent = Intent(requireActivity(), ChatActivity::class.java)
             intent.putExtra("channel_name", item?.title)
-            intent.putExtra("others_id", "659d468c5f767a88988f6a89")
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
+            intent.putExtra("others_id", item?.writerid)
+            intent.putExtra("IsFromPost", "yes")
             startActivity(intent)
         }
 

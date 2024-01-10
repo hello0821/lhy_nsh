@@ -125,6 +125,7 @@ class WritePost : Fragment() {
         val formattedDate1 = dateFormat1.format(calendar1.time)
         val dateFormat2 = SimpleDateFormat("yyyy-MM-dd")
         val formattedDate2 = dateFormat2.format(calendar2.time)
+
         writeBtn.setOnClickListener {
             println("여기를 주목하세요~!~!~! ${imageLink}")
             val imagefile = prepareImageFilePart(requireContext(), "image", imageLink)

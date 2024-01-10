@@ -114,6 +114,7 @@ class Posts : Fragment() {
             val response = mRetrofitAPI.getpost()
             if(response.isSuccessful){
                 val data = response.body()
+                
                 fullItemList.clear()
                 data?.forEach { i ->
                     fullItemList.add(PostItem(i._id, i.content, i.date1, i.date2, i.imgfilename,
@@ -130,6 +131,9 @@ class Posts : Fragment() {
         item_list.clear()
         item_list.addAll(fullItemList)
         println("여기를 보세요오" + item_list)
+
+        postAdapter.notifyDataSetChanged()
+
         postAdapter = PostAdapter(item_list)
         rv_list.adapter = postAdapter
         rv_list.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
