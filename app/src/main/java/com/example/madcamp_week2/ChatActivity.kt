@@ -17,6 +17,7 @@ import com.example.madcamp_week2.MessageListActivity
 import com.google.android.material.button.MaterialButton
 import io.getstream.chat.android.client.ChatClient
 import io.getstream.chat.android.client.logger.ChatLogLevel
+import io.getstream.chat.android.client.models.Channel
 import io.getstream.chat.android.client.models.User
 import io.getstream.chat.android.common.state.Edit
 import io.getstream.chat.android.offline.plugin.factory.StreamOfflinePluginFactory
@@ -58,11 +59,16 @@ class ChatActivity : AppCompatActivity() {
     private var USER_NAME: String = ""
     private var USER_ID: String = ""
     private lateinit var server_token: String
-    var Others_ID: String = ""
+    var Others_ID: String = "no"
     var CHANNEL_NAME: String = ""
+    private var ISFROMPOST: String? = "no"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        CHANNEL_NAME = intent.getStringExtra("channel_name")?:""
+        Others_ID = intent.getStringExtra("others_id")?:""
+        ISFROMPOST = intent.getStringExtra("IsFromPost")
 
         sharedPreferences = applicationContext.getSharedPreferences("my_preferences", Context.MODE_PRIVATE)
         mretrofit = Retrofit.Builder()
@@ -112,6 +118,8 @@ class ChatActivity : AppCompatActivity() {
 
         val token: String = server_token
 
+        println("token is " + token)
+
         if (client.getCurrentUser() == null) {
             client.connectUser( // 유저 로그인
                 user = user,
@@ -119,6 +127,10 @@ class ChatActivity : AppCompatActivity() {
             ).enqueue { result ->
                 // Step 4 - 새로운 그룹 (채널) 생성
                 if (result.isSuccess) {
+                    if (ISFROMPOST == "yes") {
+                        createNewChannel(CHANNEL_NAME, Others_ID)
+                    }
+
                     updateChannelList()
                 }
             }
@@ -138,6 +150,20 @@ class ChatActivity : AppCompatActivity() {
 
         binding.channelListView.setChannelItemClickListener { channel ->
             val intent = MessageListActivity.newIntent(this, channel)
+            println("this is channgel members "+channel.members)
+
+            val members = channel.members
+            println("USERID " + USER_ID)
+            println("get member id" + members[0].user.id)
+
+            if (members[0].user.id == USER_ID) {
+                USER_ID = members[0].user.id
+                Others_ID = members[1].user.id
+            } else {
+                USER_ID = members[1].user.id
+                Others_ID = members[0].user.id
+            }
+
             intent.putExtra("others_id", Others_ID)
             intent.putExtra("my_id", USER_ID)
             startActivity(intent)
@@ -183,10 +209,11 @@ class ChatActivity : AppCompatActivity() {
 
         val confirmBtn = dialogView.findViewById<Button>(R.id.Addbutton)
         val cancelBtn = dialogView.findViewById<Button>(R.id.Cancelbutton)
-        val channelName = dialogView.findViewById<EditText>(R.id.channelName).text.toString()
-        val channelOther = dialogView.findViewById<EditText>(R.id.channelOther).text.toString()
+
 
         confirmBtn.setOnClickListener {
+            val channelName = dialogView.findViewById<EditText>(R.id.channelName).text.toString()
+            val channelOther = dialogView.findViewById<EditText>(R.id.channelOther).text.toString()
             createNewChannel(channelName, channelOther)
             alertDialog.dismiss()
         }
@@ -198,17 +225,8 @@ class ChatActivity : AppCompatActivity() {
         alertDialog.show()
     }
 
-    override fun onNewIntent(intent: Intent) {
-        super.onNewIntent(intent)
-
-        CHANNEL_NAME = checkNotNull(intent.getStringExtra("channel_name"))
-        Others_ID = checkNotNull(intent.getStringExtra("others_id"))
-        createNewChannel(CHANNEL_NAME, Others_ID)
-
-        println("channel name" + CHANNEL_NAME)
-    }
-
     private fun createNewChannel(channelName: String, otherid: String) {
+
         val channelId = "channel_${System.currentTimeMillis()}"
         client.createChannel(
             channelType = "messaging",

@@ -18,6 +18,8 @@ import com.google.android.material.tabs.TabLayoutMediator
 class MainActivity : AppCompatActivity() {
     private lateinit var viewPager: ViewPager
     var teamState: String? = ""
+    var otheruserid: String? = ""
+    var myuserid: String? = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,6 +27,8 @@ class MainActivity : AppCompatActivity() {
 
         if (intent.hasExtra("currentState")) {
             teamState = intent.getStringExtra("currentState")
+            otheruserid = intent.getStringExtra("otheruserid")
+            myuserid = intent.getStringExtra("myuserid")
         }
 
         setupViewPagerAndTabs()
@@ -34,6 +38,8 @@ class MainActivity : AppCompatActivity() {
         super.onNewIntent(intent)
         if (intent.hasExtra("currentState")) {
             teamState = intent.getStringExtra("currentState")
+            otheruserid = intent.getStringExtra("otheruserid")
+            myuserid = intent.getStringExtra("myuserid")
         }
         handleIntent(intent)
     }
@@ -50,7 +56,7 @@ class MainActivity : AppCompatActivity() {
                 "My Page" -> 3
                 else -> 0
             }
-            println("In handleIntent")
+
             viewPager.currentItem = tabIndex
             moveToTab(tabIndex)
         }

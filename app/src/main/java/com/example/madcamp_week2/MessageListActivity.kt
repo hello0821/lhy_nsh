@@ -21,6 +21,7 @@ import io.getstream.chat.android.ui.message.list.header.viewmodel.bindView
 import io.getstream.chat.android.ui.message.list.viewmodel.bindView
 import io.getstream.chat.android.ui.message.list.viewmodel.factory.MessageListViewModelFactory
 import okhttp3.ResponseBody
+import org.bson.types.ObjectId
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -38,8 +39,8 @@ data class check_value(
 interface valueapi{
     @GET("/checkteam")
     fun checkteam(
-        @Query("myid") myid: String,
-        @Query("otheruserid") userid: String): Call<check_value>
+        @Query("myid") myid: ObjectId,
+        @Query("otheruserid") userid: ObjectId): Call<check_value>
 }
 var otheruserid: String =""
 var myid: String = ""
@@ -116,8 +117,9 @@ class MessageListActivity : AppCompatActivity() {
 
         //chatactivity에서 넘어온 유저아이디
         if (intent.hasExtra("others_id")) {
-            otheruserid = intent.getStringExtra("others_id").toString()
-            myid = intent.getStringExtra("my_id").toString()
+            println("작동2" + intent.getStringExtra("others_id"))
+            otheruserid = intent.getStringExtra("others_id")?:""
+            myid = intent.getStringExtra("my_id").toString()?:""
         }
 
         val cid = checkNotNull(intent.getStringExtra(CID_KEY)) {
@@ -174,11 +176,15 @@ class MessageListActivity : AppCompatActivity() {
             .addConverterFactory(GsonConverterFactory.create())
             .build()
         mRetrofitAPI = mretrofit.create(valueapi::class.java)
-        val call: Call<check_value> = mRetrofitAPI.checkteam(myid, otheruserid)
+
+        val sendid = ObjectId(myid)
+        val sendotherid = ObjectId(otheruserid)
+        val call: Call<check_value> = mRetrofitAPI.checkteam(sendid, sendotherid)
         call.enqueue(object: Callback<check_value> {
             override fun onResponse(call: Call<check_value>, response: Response<check_value>) {
                 if(response.isSuccessful){
                     val output = response.body()
+                    println("output is " + output?.value)
                     if(output?.value == 1){
                         test = 1
                     }
@@ -206,6 +212,8 @@ class MessageListActivity : AppCompatActivity() {
                 val intent = Intent(this, MainActivity::class.java)
                 intent.putExtra("returnToTab", "Chatting")
                 intent.putExtra("currentState", "Confirm")
+                intent.putExtra("otheruserid", otheruserid)
+                intent.putExtra("myuserid", myid)
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
                 startActivity(intent)
             },
@@ -219,6 +227,8 @@ class MessageListActivity : AppCompatActivity() {
                 val intent = Intent(this, MainActivity::class.java)
                 intent.putExtra("returnToTab", "Chatting")
                 intent.putExtra("currentState", "Review")
+                intent.putExtra("otheruserid", otheruserid)
+                intent.putExtra("myuserid", myid)
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
                 startActivity(intent)
             },
