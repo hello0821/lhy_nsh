@@ -1,4 +1,7 @@
 # Travel Together
+Travel Together 프론트엔드 Github
+
+Travel Together 서버 및 데이터베이스 Github https://github.com/lha0/lhy_nsh_back.git
 
 ---
 
@@ -20,13 +23,11 @@
 - 이하영 - UNIST 컴퓨터공학과 20학번
 - 남승훈 - UNIST 전산학부 22학번
 
-## 개발 스택
-
 ---
 
+## 개발 스택
+
 - Kotlin
-- Flask
-- Mongo DB
 - Android Studio
 - Figma
 
