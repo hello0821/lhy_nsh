@@ -55,9 +55,6 @@
 
 - 데이터베이스에 사용자 정보가 존재하지 않을 시, 회원가입 진행
 
-https://prod-files-secure.s3.us-west-2.amazonaws.com/f6cb388f-3934-47d6-9928-26d2e10eb0fc/db740a3d-4c47-40ca-904e-4064e497ca63/signup.png
-
-https://prod-files-secure.s3.us-west-2.amazonaws.com/f6cb388f-3934-47d6-9928-26d2e10eb0fc/2657ea34-cf90-491d-a20e-7e84ad9e47f5/login.png
 
 ### Posts
 
@@ -67,7 +64,6 @@ https://prod-files-secure.s3.us-west-2.amazonaws.com/f6cb388f-3934-47d6-9928-26d
     - 데이터베이스에서 해당 게시글에 대한 정보 (작성자, 사진, 제목, 날짜, 본문 등)을 띄어줌
 - 채팅하기 버튼을 클릭하면 채팅액티비티로 전환
 
-https://prod-files-secure.s3.us-west-2.amazonaws.com/f6cb388f-3934-47d6-9928-26d2e10eb0fc/46201684-92d4-4da4-889a-eaed919fcfe7/Untitled.png
 
 ### Chatting
 
@@ -80,21 +76,14 @@ https://prod-files-secure.s3.us-west-2.amazonaws.com/f6cb388f-3934-47d6-9928-26d
 - 동행을 확정하면, 해당 Dialog가 `리뷰를 작성하시겠습니까?`로 변경 및 리뷰 작성 가능
     - 리뷰 작성 시, 상대의 데이터베이스에 리뷰 저장 및 마이페이지 리뷰 업데이트
 
-https://prod-files-secure.s3.us-west-2.amazonaws.com/f6cb388f-3934-47d6-9928-26d2e10eb0fc/1949843a-e869-4523-8837-7db55491a607/Untitled.png
 
 ### Recommendation
 
 - 카테고리를 이용하여 분류하였고, 각 질문에 답변하는 카테고리에 맞는 여행지 추천 제공
 - 동행자 찾기 버튼을 클릭 시 첫번째 탭인 게시글 탭으로 연결
 
-https://prod-files-secure.s3.us-west-2.amazonaws.com/f6cb388f-3934-47d6-9928-26d2e10eb0fc/ae30f35e-3186-419c-a2d2-5ecf6838ce01/Untitled.png
-
-https://prod-files-secure.s3.us-west-2.amazonaws.com/f6cb388f-3934-47d6-9928-26d2e10eb0fc/aee6168c-58fc-4cc9-b873-1859ff656e69/Untitled.png
-
 ### My Page
 
 - 로그인된 사용자의 정보를 볼 수 있는 탭
 - 프로필 사진과 본인의 신분을 증명하는 신분증 사진을 업로드 가능
 - 토큰을 이용하여 사용자의 정보를 데이터베이스에서 불러옴
-
-https://prod-files-secure.s3.us-west-2.amazonaws.com/f6cb388f-3934-47d6-9928-26d2e10eb0fc/5b55aebe-c703-48e5-8f55-ffd9003a596f/Untitled.png
